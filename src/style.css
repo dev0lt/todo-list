@@ -1,4 +1,34 @@
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
 .item {
   display: flex;
   gap: 10px;
+}
+
+.wrapper {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.list {
+  top: 20%;
+}
+
+.form_container {
+  /* visibility: hidden; */
+  position: absolute;
+  top: 30%;
+  background-color: aquamarine;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  padding: 2rem;
 }

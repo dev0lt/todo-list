@@ -4,33 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <h1>To do list</h1>
-    <ul class="list">
-      <li>
-        <div class="item">
-          <p>1</p>
-          <p>Wyjść na spacer</p>
-          <p>Przejść co najmniej 5km</p>
-          <p>Dzisiaj</p>
-          <p>Średnie</p>
-          <button>USUŃ</button>
-        </div>
-      </li>
-    </ul>
-    <form action="">
-      <label for="title">Title:</label>
-      <input type="text" name="" id="title" />
-      <label for="description">Description:</label>
-      <input type="text" name="" id="description" />
-      <label for="dueDate">Due date:</label>
-      <input type="text" name="" id="dueDate" />
-      <label for="priority">Priority:</label>
-      <input type="text" name="" id="priority" />
-      <button class="add">Add</button>
-    </form>
-    <script src="todo-item.js"></script>
+    <div class="wrapper">
+      <h1>To do list</h1>
+      <ul class="list">
+        <!-- <li>
+          <div class="item">
+            <p>1</p>
+            <p>Wyjść na spacer</p>
+            <p>Przejść co najmniej 5km</p>
+            <p>Dzisiaj</p>
+            <p>Średnie</p>
+            <button>USUŃ</button>
+          </div>
+        </li> -->
+      </ul>
+      <button class="new">Add new task</button>
+      <div class="form_container">
+        <form class="form" action="">
+          <label for="title">Title:</label>
+          <input type="text" name="" id="title" />
+          <label for="description">Description:</label>
+          <input type="text" name="" id="description" />
+          <label for="dueDate">Due date:</label>
+          <input type="text" name="" id="dueDate" />
+          <label for="priority">Priority:</label>
+          <input type="text" name="" id="priority" />
+          <button class="add">Add</button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
