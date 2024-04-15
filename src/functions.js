@@ -4,10 +4,10 @@ const list = document.querySelector(".list");
 const formContainer = document.querySelector(".form_container");
 
 import { Item } from ".";
-import { tasks, adder } from "./createTask";
+import { taskList, adder } from "./createTask";
 
 export function displayTasks() {
-  tasks.forEach((el, i) => {
+  taskList.tasks.forEach((el, i) => {
     el.index = i;
     adder(el, i);
   });
@@ -27,7 +27,7 @@ export function addTask(e) {
     this.priority.value
   );
 
-  tasks.push(newTask);
+  taskList.tasks.push(newTask);
   formContainer.style.visibility = "hidden";
   list.innerHTML = ``;
   displayTasks();
@@ -53,7 +53,7 @@ export function showDetails(e) {
   if (target.className === "title") {
     const target2 = e.target.parentNode.parentNode.dataset.index;
 
-    displayDetails(tasks[target2]);
+    displayDetails(taskList.tasks[target2]);
 
     const overlay = document.querySelector(".modal_overlay");
     overlay.style.visibility = "visible";
@@ -78,7 +78,7 @@ export function closeDetails(e) {
 // Inside functions
 
 function deleteTaskfromArray(i) {
-  tasks.splice(i, 1);
+  taskList.tasks.splice(i, 1);
 }
 
 function displayDetails(el) {

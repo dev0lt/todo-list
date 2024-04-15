@@ -1,4 +1,7 @@
-export let tasks = [];
+export let taskList = (function () {
+  let tasks = [];
+  return { tasks };
+})();
 
 // export function adder(obj, i) {
 //   const list = document.querySelector(".list");

@@ -1,6 +1,6 @@
 "use strict";
 
-import { tasks } from "./createTask.js";
+import { taskList } from "./createTask.js";
 import {
   createNewTask,
   addTask,
@@ -32,9 +32,10 @@ const defaultTask = new Item(
   "Medium"
 );
 
-tasks.push(defaultTask);
+taskList.tasks.push(defaultTask);
 displayTasks();
 
+console.log(taskList.tasks);
 /// Functions
 
 // function displayTasks() {
