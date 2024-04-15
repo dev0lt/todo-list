@@ -39,7 +39,7 @@ export function removeTask(e) {
   if (target === null) return;
 
   if (target.className === "delete") {
-    deleteTaskfromArray(e.target.parentNode.parentNode.dataset.index);
+    deleteTaskfromArray(e.target.closest("li").dataset.index);
     list.innerHTML = ``;
     displayTasks();
   }
@@ -51,7 +51,8 @@ export function showDetails(e) {
   if (target === null) return;
 
   if (target.className === "title") {
-    const target2 = e.target.parentNode.parentNode.dataset.index;
+    const target2 = e.target.closest("li").dataset.index;
+    taskList.index = target2;
 
     displayDetails(taskList.tasks[target2]);
 
@@ -75,7 +76,7 @@ export function closeDetails(e) {
   }
 }
 
-// Inside functions
+// Inner functions
 
 function deleteTaskfromArray(i) {
   taskList.tasks.splice(i, 1);
@@ -86,11 +87,12 @@ function displayDetails(el) {
   item.classList = "task_details";
 
   item.innerHTML = `
-  //   <p>${el.title}</p>
-  //   <p>${el.description}</p>
-  //   <p>${el.dueDate}</p>
-  //   <p>${el.priority}</p>
-  <button class="close">X</button>`;
+  <h3>${el.title}</h3>
+  <p>${el.description}</p>
+  <textarea id="description">${el.description}</textarea>
+  <p>${el.dueDate}</p>
+  <p>${el.priority}</p>
+  <button class="close">Close</button>`;
 
   item.style.visibility = "visible";
 

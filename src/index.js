@@ -8,6 +8,7 @@ import {
   removeTask,
   showDetails,
   closeDetails,
+  changeDescription,
 } from "./functions.js";
 
 const list = document.querySelector(".list");
@@ -28,40 +29,12 @@ export class Item {
 const defaultTask = new Item(
   "Go on walk",
   "Walk at least 5km",
-  "Today",
+  new Date().toDateString(),
   "Medium"
 );
 
 taskList.tasks.push(defaultTask);
 displayTasks();
-
-console.log(taskList.tasks);
-/// Functions
-
-// function displayTasks() {
-//   tasks.forEach((el, i) => {
-//     el.index = i;
-//     adder(el, i);
-//   });
-// }
-
-// function displayDetails(el) {
-//   const item = document.createElement("div");
-//   item.classList = "task_details";
-
-//   item.innerHTML = `
-//   //   <p>${el.title}</p>
-//   //   <p>${el.description}</p>
-//   //   <p>${el.dueDate}</p>
-//   //   <p>${el.priority}</p>
-//   <button class="close">X</button>`;
-
-//   item.style.visibility = "visible";
-
-//   const wrapper = document.querySelector(".wrapper");
-
-//   wrapper.appendChild(item);
-// }
 
 // Event listeners
 
