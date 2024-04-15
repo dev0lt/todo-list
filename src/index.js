@@ -1,18 +1,14 @@
 "use strict";
 
-import { adder } from "./adder.js";
+import { adder, tasks } from "./adder.js";
 
 class Item {
-  constructor(title, description, dueDate, priority) {
+  constructor(title, description, dueDate, priority, index) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
   }
-
-  // logger() {
-  //   console.log(this);
-  // }
 }
 
 const defaultTask = new Item(
@@ -22,12 +18,20 @@ const defaultTask = new Item(
   "Medium"
 );
 
-adder(defaultTask);
+tasks.push(defaultTask);
+
+function displayTasks() {
+  tasks.forEach((el, i) => {
+    el.index = i;
+    adder(el, i);
+  });
+}
+
+displayTasks();
 
 ///
 
 const buttonNewTask = document.querySelector(".new");
-// const buttonAdd = document.querySelector(".add");
 
 const formContainer = document.querySelector(".form_container");
 const form = document.querySelector(".form");
@@ -46,7 +50,27 @@ form.addEventListener("submit", function (e) {
     this.priority.value
   );
 
-  console.log(newTask);
-  adder(newTask);
+  tasks.push(newTask);
+  console.log(tasks);
   formContainer.style.visibility = "hidden";
+  list.innerHTML = ``;
+  displayTasks();
+});
+
+const list = document.querySelector(".list");
+
+function deleteTask(i) {
+  tasks.splice(i, 1);
+}
+
+list.addEventListener("click", function (e) {
+  const target = e.target.closest(".delete");
+
+  if (target === null) return;
+
+  if (target.className === "delete") {
+    deleteTask(e.target.parentNode.parentNode.dataset.index);
+    list.innerHTML = ``;
+    displayTasks();
+  }
 });
