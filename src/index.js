@@ -1,15 +1,29 @@
 "use strict";
 
-import { adder, tasks } from "./adder.js";
+import { tasks } from "./createTask.js";
+import {
+  createNewTask,
+  addTask,
+  displayTasks,
+  removeTask,
+  showDetails,
+  closeDetails,
+} from "./functions.js";
 
-class Item {
-  constructor(title, description, dueDate, priority, index) {
+const list = document.querySelector(".list");
+const form = document.querySelector(".form");
+const buttonNewTask = document.querySelector(".new");
+
+export class Item {
+  constructor(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
   }
 }
+
+// Default task created at the start
 
 const defaultTask = new Item(
   "Go on walk",
@@ -19,58 +33,43 @@ const defaultTask = new Item(
 );
 
 tasks.push(defaultTask);
-
-function displayTasks() {
-  tasks.forEach((el, i) => {
-    el.index = i;
-    adder(el, i);
-  });
-}
-
 displayTasks();
 
-///
+/// Functions
 
-const buttonNewTask = document.querySelector(".new");
+// function displayTasks() {
+//   tasks.forEach((el, i) => {
+//     el.index = i;
+//     adder(el, i);
+//   });
+// }
 
-const formContainer = document.querySelector(".form_container");
-const form = document.querySelector(".form");
+// function displayDetails(el) {
+//   const item = document.createElement("div");
+//   item.classList = "task_details";
 
-buttonNewTask.addEventListener("click", function () {
-  formContainer.style.visibility = "visible";
-});
+//   item.innerHTML = `
+//   //   <p>${el.title}</p>
+//   //   <p>${el.description}</p>
+//   //   <p>${el.dueDate}</p>
+//   //   <p>${el.priority}</p>
+//   <button class="close">X</button>`;
 
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
+//   item.style.visibility = "visible";
 
-  const newTask = new Item(
-    this.title.value,
-    this.description.value,
-    this.dueDate.value,
-    this.priority.value
-  );
+//   const wrapper = document.querySelector(".wrapper");
 
-  tasks.push(newTask);
-  console.log(tasks);
-  formContainer.style.visibility = "hidden";
-  list.innerHTML = ``;
-  displayTasks();
-});
+//   wrapper.appendChild(item);
+// }
 
-const list = document.querySelector(".list");
+// Event listeners
 
-function deleteTask(i) {
-  tasks.splice(i, 1);
-}
+buttonNewTask.addEventListener("click", createNewTask);
 
-list.addEventListener("click", function (e) {
-  const target = e.target.closest(".delete");
+form.addEventListener("submit", addTask);
 
-  if (target === null) return;
+list.addEventListener("click", removeTask);
 
-  if (target.className === "delete") {
-    deleteTask(e.target.parentNode.parentNode.dataset.index);
-    list.innerHTML = ``;
-    displayTasks();
-  }
-});
+list.addEventListener("click", showDetails);
+
+document.addEventListener("click", closeDetails);
