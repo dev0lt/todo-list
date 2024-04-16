@@ -2,13 +2,12 @@
 
 import { taskList } from "./createTask.js";
 import {
-  createNewTask,
+  showNewTaskForm,
   addTask,
-  displayTasks,
+  renderTasks,
   removeTask,
   showDetails,
   closeDetails,
-  changeDescription,
 } from "./functions.js";
 
 const list = document.querySelector(".list");
@@ -34,11 +33,12 @@ const defaultTask = new Item(
 );
 
 taskList.tasks.push(defaultTask);
-displayTasks();
+renderTasks();
+console.log(taskList.tasks);
 
 // Event listeners
 
-buttonNewTask.addEventListener("click", createNewTask);
+buttonNewTask.addEventListener("click", showNewTaskForm);
 
 form.addEventListener("submit", addTask);
 
