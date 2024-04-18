@@ -11,7 +11,7 @@ import {
 } from "./functions.js";
 
 const list = document.querySelector(".list");
-const form = document.querySelector(".form");
+const form = document.querySelector(".form_container");
 const buttonNewTask = document.querySelector(".new");
 
 export class Item {
@@ -33,8 +33,22 @@ const defaultTask = new Item(
 );
 
 taskList.tasks.push(defaultTask);
+// taskList.tasks.push(defaultTask);
+// taskList.tasks.push(defaultTask);
+// taskList.tasks.push(defaultTask);
+// taskList.tasks.push(defaultTask);
+// taskList.tasks.push(defaultTask);
+// taskList.tasks.push(defaultTask);
+// taskList.tasks.push(defaultTask);
+// taskList.tasks.push(defaultTask);
+// taskList.tasks.push(defaultTask);
+// taskList.tasks.push(defaultTask);
+// taskList.tasks.push(defaultTask);
+// taskList.tasks.push(defaultTask);
+// taskList.tasks.push(defaultTask);
+// taskList.tasks.push(defaultTask);
+// taskList.tasks.push(defaultTask);
 renderTasks();
-console.log(taskList.tasks);
 
 // Event listeners
 

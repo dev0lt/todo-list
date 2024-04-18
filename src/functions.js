@@ -1,13 +1,16 @@
 "use strict";
 
-const list = document.querySelector(".list");
-const formContainer = document.querySelector(".form_container");
-const wrapper = document.querySelector(".wrapper");
-
 import { Item } from ".";
 import { taskList, adder } from "./createTask";
 
+const list = document.querySelector(".list");
+const formContainer = document.querySelector(".form_container");
+const wrapper = document.querySelector(".wrapper");
+const overlay = document.querySelector(".modal_overlay");
+
 export function renderTasks() {
+  list.innerHTML = ``;
+
   taskList.tasks.forEach((el, i) => {
     el.index = i;
     adder(el, i);
@@ -16,6 +19,7 @@ export function renderTasks() {
 
 export function showNewTaskForm() {
   formContainer.style.visibility = "visible";
+  overlay.style.visibility = "visible";
 }
 
 export function addTask(e) {
@@ -30,6 +34,7 @@ export function addTask(e) {
 
   taskList.tasks.push(newTask);
   formContainer.style.visibility = "hidden";
+  overlay.style.visibility = "hidden";
   list.innerHTML = ``;
   renderTasks();
 }
@@ -57,7 +62,6 @@ export function showDetails(e) {
 
     displayDetails(taskList.tasks[target2]);
 
-    const overlay = document.querySelector(".modal_overlay");
     overlay.style.visibility = "visible";
   }
 }
@@ -68,7 +72,6 @@ export function closeDetails(e) {
   if (target === null) return;
 
   if (target.className === "close") {
-    const overlay = document.querySelector(".modal_overlay");
     overlay.style.visibility = "hidden";
 
     const thisForm = document.querySelector(".form2");
@@ -88,15 +91,25 @@ function displayDetails(el) {
 
   item.innerHTML = `
   <form class="form2" action="">
-  <label for="title">Title:</label>
-  <input type="text" name="" id="title" value="${el.title}" />
-  <label for="description">Description:</label>
-  <input type="text" name="" id="description" value="${el.description}"/>
-  <label for="dueDate">Due date:</label>
-  <input type="date" name="" id="dueDate" value="${el.dueDate}"/>
-  <label for="priority">Priority:</label>
-  <input type="text" name="" id="priority" value="${el.priority}"/>
-  <button class="close">Close</button>
+  <ul class="form_items">
+    <li>
+      <label for="title">Title:</label>
+      <input type="text" name="" id="title" value="${el.title}" />
+    </li>
+    <li>
+      <label for="description">Description:</label>
+      <input type="text" name="" id="description" value="${el.description}"/>
+    </li>
+    <li>
+      <label for="dueDate">Due date:</label>
+      <input type="date" name="" id="dueDate" value="${el.dueDate}"/>
+    </li>
+    <li>
+      <label for="priority">Priority:</label>
+      <input type="text" name="" id="priority" value="${el.priority}"/>
+    </li>
+    </ul>
+    <button class="close">Close</button>
   </form>`;
 
   item.style.visibility = "visible";
@@ -111,6 +124,7 @@ function overwriteDetails(x) {
     dueDate: x.dueDate.value,
     priority: x.priority.value,
   };
+  renderTasks();
 }
 
 function deleteTaskfromArray(i) {
