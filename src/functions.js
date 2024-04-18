@@ -36,6 +36,9 @@ export function addTask(e) {
   formContainer.style.visibility = "hidden";
   overlay.style.visibility = "hidden";
   list.innerHTML = ``;
+
+  formContainer.reset();
+
   renderTasks();
 }
 
