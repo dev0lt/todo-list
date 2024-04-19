@@ -2,6 +2,11 @@
 
 import { Item } from ".";
 import { taskList, adder } from "./createTask";
+import { formatDistanceToNow } from "date-fns";
+
+const dateToNow = function (x) {
+  return formatDistanceToNow(x, { addSuffix: true });
+};
 
 const list = document.querySelector(".list");
 const formContainer = document.querySelector(".form_container");
@@ -29,7 +34,8 @@ export function addTask(e) {
     this.title.value,
     this.description.value,
     this.dueDate.value,
-    this.priority.value
+    this.priority.value,
+    dateToNow(this.dueDate.value)
   );
 
   taskList.tasks.push(newTask);
@@ -40,6 +46,17 @@ export function addTask(e) {
   formContainer.reset();
 
   renderTasks();
+  console.log(taskList.tasks);
+}
+
+export function closeForm(e) {
+  e.preventDefault();
+
+  if (e.target.closest(".close2")) {
+    formContainer.reset();
+    formContainer.style.visibility = "hidden";
+    overlay.style.visibility = "hidden";
+  }
 }
 
 export function removeTask(e) {
@@ -126,6 +143,7 @@ function overwriteDetails(x) {
     description: x.description.value,
     dueDate: x.dueDate.value,
     priority: x.priority.value,
+    toNow: dateToNow(x.dueDate.value),
   };
   renderTasks();
 }
@@ -133,3 +151,5 @@ function overwriteDetails(x) {
 function deleteTaskfromArray(i) {
   taskList.tasks.splice(i, 1);
 }
+
+// let width = document.getElementById("foo").offsetWidth;
