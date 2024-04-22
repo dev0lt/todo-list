@@ -1,5 +1,7 @@
 "use strict";
 
+import { renderTasks } from "./functions";
+
 export let taskList = (function () {
   let tasks = [];
   let index = 0;
@@ -21,4 +23,20 @@ export function adder(obj, i) {
 </div>`;
 
   list.appendChild(item);
+}
+
+// Local storage
+
+export function setLocalStorage() {
+  localStorage.setItem("tasks", JSON.stringify(taskList.tasks));
+}
+
+export function getLocalStorage() {
+  const data = JSON.parse(localStorage.getItem("tasks"));
+
+  if (!data) return;
+
+  taskList.tasks = data;
+
+  renderTasks();
 }

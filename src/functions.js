@@ -1,7 +1,7 @@
 "use strict";
 
 import { Item } from ".";
-import { taskList, adder } from "./createTask";
+import { taskList, adder, setLocalStorage } from "./createTask";
 import { formatDistanceToNow } from "date-fns";
 
 const dateToNow = function (x) {
@@ -46,7 +46,8 @@ export function addTask(e) {
   formContainer.reset();
 
   renderTasks();
-  console.log(taskList.tasks);
+
+  setLocalStorage();
 }
 
 export function closeForm(e) {
@@ -67,6 +68,7 @@ export function removeTask(e) {
   if (target.className === "delete") {
     deleteTaskfromArray(e.target.closest("li").dataset.index);
     list.innerHTML = ``;
+    setLocalStorage();
     renderTasks();
   }
 }
@@ -101,6 +103,14 @@ export function closeDetails(e) {
 
     wrapper.removeChild(document.querySelector(".task_details"));
   }
+}
+
+export function resetTaskList() {
+  localStorage.removeItem("tasks");
+
+  taskList.tasks = [];
+
+  renderTasks();
 }
 
 // Inner functions

@@ -1,6 +1,6 @@
 "use strict";
 
-import { taskList } from "./createTask.js";
+import { taskList, getLocalStorage } from "./createTask.js";
 import {
   showNewTaskForm,
   addTask,
@@ -9,6 +9,7 @@ import {
   removeTask,
   showDetails,
   closeDetails,
+  resetTaskList,
 } from "./functions.js";
 import { format, formatDistanceToNow } from "date-fns";
 
@@ -20,6 +21,7 @@ const list = document.querySelector(".list");
 const form = document.querySelector(".form_container");
 const buttonNewTask = document.querySelector(".new");
 const close2 = document.querySelector(".close2");
+const buttonReset = document.querySelector(".reset");
 
 export class Item {
   constructor(title, description, dueDate, priority, toNow) {
@@ -58,7 +60,10 @@ taskList.tasks.push(defaultTask);
 // taskList.tasks.push(defaultTask);
 // taskList.tasks.push(defaultTask);
 renderTasks();
-console.log(taskList.tasks);
+
+// Load data from local storage
+
+getLocalStorage();
 
 // Event listeners
 
@@ -73,3 +78,5 @@ list.addEventListener("click", removeTask);
 list.addEventListener("click", showDetails);
 
 document.addEventListener("click", closeDetails);
+
+buttonReset.addEventListener("click", resetTaskList);
